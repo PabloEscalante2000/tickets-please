@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\filters\v1\TicketFilter;
 use App\Http\Resources\v1\TicketResource;
 use App\Models\Ticket;
-use Illuminate\Http\Request;
 
 class AuthorTicketsController extends Controller
 {
