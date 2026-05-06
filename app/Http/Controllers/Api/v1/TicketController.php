@@ -34,14 +34,7 @@ class TicketController extends ApiController
             ]);
         }
 
-        $model = [
-            "title" => $request->input("data.attributes.title"),
-            "description" => $request->input("data.attributes.description"),
-            "status" => $request->input("data.attributes.status"),
-            "user_id" => $request->input("data.relationships.author.data.id")
-        ];
-
-        return new TicketResource(Ticket::create($model));
+        return new TicketResource(Ticket::create($request->mappedAttributes()));
         
     }
 
@@ -73,15 +66,7 @@ class TicketController extends ApiController
         try {
             $ticket = Ticket::findOrFail($ticket_id);
 
-            $request->mappedAttributes();
-            $model = [
-                "title" => $request->input("data.attributes.title"),
-                "description" => $request->input("data.attributes.description"),
-                "status" => $request->input("data.attributes.status"),
-                "user_id" => $request->input("data.relationships.author.data.id")
-            ];
-
-            $ticket->update($model);
+            $ticket->update($request->mappedAttributes());
 
             return new TicketResource($ticket);
         } catch (ModelNotFoundException $th) {
@@ -94,15 +79,7 @@ class TicketController extends ApiController
         try {
             $ticket = Ticket::findOrFail($ticket_id);
 
-            $request->mappedAttributes();
-            $model = [
-                "title" => $request->input("data.attributes.title"),
-                "description" => $request->input("data.attributes.description"),
-                "status" => $request->input("data.attributes.status"),
-                "user_id" => $request->input("data.relationships.author.data.id")
-            ];
-
-            $ticket->update($model);
+            $ticket->update($request->mappedAttributes());
 
             return new TicketResource($ticket);
         } catch (ModelNotFoundException $th) {
