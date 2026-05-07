@@ -4,6 +4,7 @@ namespace App\Policies\v1;
 
 use App\Models\Ticket;
 use App\Models\User;
+use App\Permisions\v1\Abilities;
 
 class TicketPolicy
 {
@@ -16,6 +17,11 @@ class TicketPolicy
     }
 
     public function update(User $user, Ticket $ticket) {
-        return $user->id === $ticket->user_id;
+        if($user->tokenCan(Abilities::UpdateTicket)){
+            return true;
+        } else if($user->tokenCan(Abilities::UpdateOwnTicket)){
+            return $ticket->user_id == $user->id;
+        }
+        return false;
     }
 }
