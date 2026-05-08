@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api\v1;
 
+use App\Permisions\v1\Abilities;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,10 +14,11 @@ class BaseTicketRequest extends FormRequest
             "data.attributes.title" => "title",
             "data.attributes.description" => "description",
             "data.attributes.status" => "status",
-            "data.relationships.author.data.id" => "user_id",
             "data.attributes.createdAt" => "created_at",
             "data.attributes.updatedAt" => "updated_at"
         ];
+
+        if(!$this->user()->tokenCan(Abilities::UpdateOwnTicket))
 
         $attributesToUpdate = [];
 
