@@ -33,7 +33,7 @@ class BaseTicketRequest extends FormRequest
         return $attributesToUpdate;
     }
 
-    public function messages(){
+    public function messages() {
         return [
             "data.attributes.status" => "The data.attributes.status is invalid. Please use A, C, H or X"
         ];
