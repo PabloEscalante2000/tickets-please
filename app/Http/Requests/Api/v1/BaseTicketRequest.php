@@ -18,7 +18,9 @@ class BaseTicketRequest extends FormRequest
             "data.attributes.updatedAt" => "updated_at"
         ];
 
-        if(!$this->user()->tokenCan(Abilities::UpdateOwnTicket))
+        if(!$this->user()->tokenCan(Abilities::UpdateOwnTicket)) {
+            $attributeMap["data.relationships.author.data.id"] = "user_id";
+        }
 
         $attributesToUpdate = [];
 
